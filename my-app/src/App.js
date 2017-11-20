@@ -12,11 +12,21 @@ class ButtonExample extends Component {
   }
 }
 
+class AddTask extends Component {
+  render() {
+    return (
+      <div>Aqui agregaremos task :D</div>
+    );
+  }
+}
+
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <ButtonExample />
+        <AddTask />
       </div>
     );
   }
