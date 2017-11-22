@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import './App.css';
 // importamos que vamos a utilizar de bootstrap
 // Debemos escribir los componentes de bootstrap
-import { FormGroup, FormControl} from 'react-bootstrap'
+import { FormGroup, FormControl, Button, Grid, Row, Col, Radio} from 'react-bootstrap'
 
 class Login extends Component {
 	render() {
 		return (
-			<form>
-			    <FormGroup bsSize="large">
-			      <FormControl type="text" placeholder="Large text" />
-			    </FormGroup>
-			    <FormGroup>
-			      <FormControl type="text" placeholder="Normal text" />
-			    </FormGroup>
-			    <FormGroup bsSize="small">
-			      <FormControl type="text" placeholder="Small text" />
-			    </FormGroup>
-			</form>
+			<Grid className="Login">
+    			<Row className="show-grid">
+      				<Col xs={6} xsOffset={3}>
+      					<code>
+							<form>
+							    <FormGroup>
+							      <FormControl type="text" placeholder="Email ID"/>
+							    </FormGroup>
+							    <FormGroup>
+							      <FormControl type="text" placeholder="Password"/>
+							    </FormGroup>
+							    <Button bsSize="large" block>Block level button</Button>
+							    <Radio checked readOnly>Recordar Mi Usuario</Radio>
+							    <p>¿Olvidaste tus Datos?</p>
+							</form>
+						</code>
+					</Col>
+				</Row>
+			</Grid>
 		)
 	}
 }
