@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, FormControl, FormGroup, ButtonToolbar, Col } from 'react-bootstrap'
+import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class AddTask extends Component {
 
@@ -41,20 +42,26 @@ class AddTask extends Component {
                             <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Large text" />
                         </FormGroup>
                     </Col>
-                    <Col xsPush={4} xs={4}>
-                        <ButtonToolbar>                        
+
+                    <Row>
+                        <Col xs={6}>
+                            <Link to="estado">
+                                <Button type="submit" bsSize="large">Volver</Button>
+                            </Link>                            
+                        </Col>
+                        <Col xs={6}>
                             <Button type="submit" bsSize="large" style={styleBtn}>Add Task</Button>
-                        </ButtonToolbar>
-                    </Col>
-                    
+                        </Col>
+                    </Row>                
 
                     <Col xs={12} style={styleUlLi}>
-                        <ul>
-                            {this.state.task.map((element, idx) => {
-                                return <li key={idx}>{element}</li>
+                        <ListGroup>
+                            {this.state.task.map((element, idx) => {                                    
+                                    return <ListGroupItem key={idx}>{element}</ListGroupItem> 
                             })}
-                        </ul>   
-                    </Col>                                     
+                        </ListGroup>
+                    </Col>            
+
                 </form>                
             </div>
         );

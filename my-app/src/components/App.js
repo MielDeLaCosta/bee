@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <strong>Desde App</strong>
+        <strong>Bee App</strong>
         {this.props.children}
       </div>
     );
