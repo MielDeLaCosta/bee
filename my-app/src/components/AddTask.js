@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 class AddTask extends Component {
@@ -17,23 +17,41 @@ class AddTask extends Component {
         this.setState({ task: task })
     }
 
-    handleInputTaskChange = (event) => { 
+    handleInputTaskChange = (event) => {
         console.log(event)
         this.setState({ inputValue: event.target.value })
         // detecta el input al recibir un cambio
         console.log('lala', event.target.value)
     }
 
+    delete = (event) => {
+        console.log('delete');
+    }
+
+    edit = (event) => {
+        console.log('edit');
+    }
+
     render() {
         const styleBtn = {
-            backgroundColor: 'darkgrey',
-            color: 'white'              
+            width: 120,
+            marginTop:10            
         }
 
         const styleUlLi = {
-            marginTop: 50
+            marginTop: 50            
         }
 
+        const styleDelEdit = {
+            height: 41
+        }
+
+        const styleBtnSave = {
+            position: 'fixed',
+            top: 580,
+            right: 120
+        }        
+    
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -46,23 +64,43 @@ class AddTask extends Component {
                     <Row>
                         <Col xs={6}>
                             <Link to="estado">
-                                <Button type="submit" bsSize="large">Volver</Button>
+                                <Button type="submit" bsSize="large" style={styleBtn}>Volver</Button>
                             </Link>                            
                         </Col>
                         <Col xs={6}>
-                            <Button type="submit" bsSize="large" style={styleBtn}>Add Task</Button>
+                            <Button type="submit" bsSize="large" bsStyle="warning" style={styleBtn}>Add Task</Button>
                         </Col>
                     </Row>                
-
+                    
                     <Col xs={12} style={styleUlLi}>
                         <ListGroup>
                             {this.state.task.map((element, idx) => {                                    
-                                    return <ListGroupItem key={idx}>{element}</ListGroupItem> 
+                                return (
+                                    <Row key={idx}>
+                                        <Col xs={8}>
+                                            <ListGroupItem>{element}</ListGroupItem> 
+                                        </Col>
+                                        <Col xs={2}>
+                                            <Button style={styleDelEdit} onClick={this.delete}>
+                                                <Glyphicon glyph="trash"/>
+                                            </Button>                                                                                        
+                                        </Col>
+                                        <Col xs={2}>
+                                            <Button style={styleDelEdit} onClick={this.edit}>
+                                                <Glyphicon glyph="edit"/>
+                                            </Button>                                                                                        
+                                        </Col>                                        
+                                    </Row>                                                                   
+                                )
                             })}
                         </ListGroup>
-                    </Col>            
-
+                    </Col>                           
                 </form>                
+                <Col xs={12}>
+                    <Link to="resume">
+                        <Button type="submit" bsSize="large" bsStyle="warning" style={styleBtnSave}>Guardar lista</Button>
+                    </Link>                    
+                </Col> 
             </div>
         );
     }
