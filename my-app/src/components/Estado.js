@@ -10,25 +10,21 @@ class Estado extends Component {
     }
 
     warning = (event) => {
-        console.log('amarillo');
+        this.state.color = '#FFD700'
+        console.log(this.state.color);
     }
 
     success = (event) => {
-        console.log('verde');
+        this.state.color = '#32CD32'
+        console.log(this.state.color);
     }
 
     danger = (event) => {
-        console.log('rojo')
+        this.state.color = '#DC143C'
+        console.log(this.state.color)
     }
     
-    render() {
-        const colorsState = [
-            '#f0ad4e', // amarillo
-            '#5cb85c', // verde
-            '#d9534f'  // rojo
-        ]
-
-        console.log('color', this.state.colorsState)
+    render() {               
 
         const styleBtnWarning = {
             borderRadius: 50,

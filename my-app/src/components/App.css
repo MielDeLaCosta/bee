@@ -1,7 +1,17 @@
 .App {
   text-align: center;
 }
-
+.Login {
+  margin-top: 3em;
+  border: 1px dashed whitesmoke;
+}
+.Brand {
+  margin-bottom: 1em;
+}
+.Logintext {
+  margin-top: 1em;
+  color: white;
+}
 /* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
