@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { FormGroup, FormControl, Button, Grid, Row, Col, Radio, Image} from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class Login extends Component {
+
+	// siguiente pagina
+    map = (event) => {
+        console.log('working');
+    }
+
 	render() {
 		return (
 			<Grid className="Login">
@@ -18,7 +25,10 @@ class Login extends Component {
 							    <FormGroup>
 							    	<FormControl type="text" placeholder="Password"/>
 							    </FormGroup>
-							    	<Button bsStyle="primary" block><Image src="img/sbee.png"/></Button>
+									<Link to="map">
+                                        <Button bsStyle="primary" block onClick={this.map}><Image src="img/sbee.png"/></Button>
+                                    </Link>
+							    	
 							    <Col xs={6}>
 							    	<Radio checked readOnly className="Logintext">Recordar Mi Usuario</Radio>
 							    </Col>
