@@ -2,8 +2,26 @@ import React, { Component } from 'react';
 import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-class AddTask extends Component {
+const styleBtn = {
+    width: 120,
+    marginTop:10            
+}
 
+const styleUlLi = {
+    marginTop: 50            
+}
+
+const styleDelEdit = {
+    height: 41
+}
+
+const styleBtnSave = {
+    position: 'fixed',
+    top: 580,
+    right: 120
+}
+
+class AddTask extends Component {
     state = {
         task: [],
         inputValue: ''
@@ -15,6 +33,7 @@ class AddTask extends Component {
         let task = this.state.task;
         task.push(this.state.inputValue)
         this.setState({ task: task })
+        console.log("add working");
     }
 
     handleInputTaskChange = (event) => {
@@ -24,34 +43,20 @@ class AddTask extends Component {
         console.log('lala', event.target.value)
     }
 
-    delete = (event) => {
-        console.log('delete');
+    delete = todoId => (event) => {
+        console.log(todoId);
+        let erase = this.state.task.slice();
+        // se necesita poner el 1 para que tome todas las tareas
+        erase.splice(todoId, 1);
+        this.setState({ task: erase })
+        console.log(erase);
     }
 
     edit = (event) => {
         console.log('edit');
     }
 
-    render() {
-        const styleBtn = {
-            width: 120,
-            marginTop:10            
-        }
-
-        const styleUlLi = {
-            marginTop: 50            
-        }
-
-        const styleDelEdit = {
-            height: 41
-        }
-
-        const styleBtnSave = {
-            position: 'fixed',
-            top: 580,
-            right: 120
-        }        
-    
+    render() {    
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -81,7 +86,7 @@ class AddTask extends Component {
                                             <ListGroupItem>{element}</ListGroupItem> 
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.delete}>
+                                            <Button style={styleDelEdit} onClick={this.delete(idx)}>
                                                 <Glyphicon glyph="trash"/>
                                             </Button>                                                                                        
                                         </Col>
