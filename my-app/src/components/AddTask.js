@@ -52,8 +52,15 @@ class AddTask extends Component {
         console.log(erase);
     }
 
-    edit = (event) => {
-        console.log('edit');
+    edit = todoId => (event) => {
+        let el = prompt('Editando...');
+        console.log(el);
+        console.log(todoId);
+        this.setState( state => {
+            // cambia contenido
+            state.task[todoId] = el;
+            return state
+        });
     }
 
     render() {    
@@ -91,7 +98,7 @@ class AddTask extends Component {
                                             </Button>                                                                                        
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.edit}>
+                                            <Button style={styleDelEdit} onClick={this.edit(idx)}>
                                                 <Glyphicon glyph="edit"/>
                                             </Button>                                                                                        
                                         </Col>                                        
