@@ -1,5 +1,8 @@
-import React, {Component} from 'react';
-import {Grid, Row, Col, Image, Button, ButtonToolbar} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Grid, Row, Col, Image, Button, ButtonToolbar } from 'react-bootstrap';
+// import para vincular mi componente a redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const hiveStyle = {
     display: 'flex',
@@ -29,15 +32,32 @@ class ListHive extends Component {
                     </Col>               
                 </Row>            
                 <Row>
-                    <Col xs={6} style={colBtnStyle}>
-                        <ButtonToolbar>                                    
-                            <Button style={btnStyle}>1</Button>                                    
-                        </ButtonToolbar>
-                    </Col>                          
+                    {
+                        this.props.apiaries.map(apiary => {
+                            return (
+                                <Col xs={6} style={colBtnStyle}>
+                                    <ButtonToolbar>                                    
+                                        <Button style={btnStyle}>{apiary.name}</Button>                                    
+                                    </ButtonToolbar>
+                                </Col>                          
+                            )
+                        }) 
+                    }                    
                 </Row>    
             </Grid>            
         );
     }
 }
 
-export default ListHive;
+const mapStateToProps = (state) => {
+    // vincula el store con los this.props del componente
+    return {
+        apiaries: state.apiaries
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListHive);

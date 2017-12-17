@@ -1,4 +1,4 @@
-import * as types form './types';
+import * as types from './types';
 import apiaryData from '../data/apiary';
 
 // Carga la data
