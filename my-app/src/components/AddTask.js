@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon, Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as apiaryActions from '../actions/apiaryActions'
 
 class AddTask extends Component {
 
@@ -32,6 +35,13 @@ class AddTask extends Component {
         console.log('edit');
     }
 
+    changeApiaryStatus = () => {
+        this.props.apiaryActions.editApiaryStatus(
+            this.props.params.id, 
+            this.props.params.status
+        )
+    }
+
     render() {
         const styleBtn = {
             width: 120,
@@ -54,8 +64,16 @@ class AddTask extends Component {
     
         return (
             <div>
+                
+                
+
+
                 <form onSubmit={this.handleSubmit}>
+                    
                     <Col xs={12}>
+                    <Alert bsStyle={this.props.params.status}>
+                        <h4>{this.props.params.status.toUpperCase()}</h4>                    
+                    </Alert>
                         <FormGroup bsSize="large">
                             <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Large text" />
                         </FormGroup>
@@ -63,7 +81,7 @@ class AddTask extends Component {
 
                     <Row>
                         <Col xs={6}>
-                            <Link to="estado">
+                            <Link to={"/estado/" + this.props.params.id}>
                                 <Button type="submit" bsSize="large" style={styleBtn}>Volver</Button>
                             </Link>                            
                         </Col>
@@ -97,8 +115,8 @@ class AddTask extends Component {
                     </Col>                           
                 </form>                
                 <Col xs={12}>
-                    <Link to="resume">
-                        <Button type="submit" bsSize="large" bsStyle="warning" style={styleBtnSave}>Guardar lista</Button>
+                    <Link to="/list-hive">
+                        <Button onClick={this.changeApiaryStatus} type="submit" bsSize="large" bsStyle="warning" style={styleBtnSave}>Guardar lista</Button>
                     </Link>                    
                 </Col> 
             </div>
@@ -106,4 +124,18 @@ class AddTask extends Component {
     }
 }
 
-export default AddTask
+const mapStateToProps = (state) => {
+    // vincula el store con los this.props del componente
+    return {
+        apiaries: state.apiaries
+    };
+}
+
+// despacho un action que escucha el reducer para devolver el nuevo estado
+const mapDispatchToProps = (dispatch) => {
+    return {
+        apiaryActions: bindActionCreators(apiaryActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask);

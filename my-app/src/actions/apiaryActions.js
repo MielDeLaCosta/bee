@@ -8,3 +8,13 @@ export const loadApiaries = () => {
     apiaries: apiaryData
   }
 }
+
+export const editApiaryStatus = (id, status) => {
+  return {
+    type: types.EDIT_APIARY_STATUS,
+    apiary: {
+      status: status,
+      id: id
+    }
+  }
+}

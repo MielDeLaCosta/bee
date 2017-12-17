@@ -36,10 +36,10 @@ class ListHive extends Component {
                     {
                         this.props.apiaries.map(apiary => {
                             return (
-                                <Col xs={6} style={colBtnStyle}>
+                                <Col key={apiary.id} xs={6} style={colBtnStyle}>
                                     <ButtonToolbar>                                    
-                                        <Link to="estado">
-                                            <Button style={btnStyle}>{apiary.name}</Button>                                    
+                                        <Link to={'estado/' + apiary.id}>
+                                            <Button style={btnStyle} bsStyle={apiary.status}>{apiary.name}</Button>                                    
                                         </Link>
                                     </ButtonToolbar>
                                 </Col>                          
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListHive);
