@@ -2,6 +2,27 @@ import React, {Component} from 'react';
 import { Button, ButtonToolbar, Col, Row, Grid,Image } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+ const styleBtnWarning = {
+            borderRadius: 50,
+            padding: 50,
+            marginBottom: 15,                
+        }
+
+const styleStates = {
+    marginTop: 30
+}
+
+const styleHive = {
+    marginTop: 140,
+    display: 'flex',
+    justifyContent: 'center'
+}
+
+const styleBtnReturn = {
+    width: 200, 
+    marginTop: 60
+}
+
 class Estado extends Component {
 
     // mantener la pantalla del color del estado
@@ -24,25 +45,9 @@ class Estado extends Component {
         console.log(this.state.color)
     }
     
-    render() {               
-
-        const styleBtnWarning = {
-            borderRadius: 50,
-            padding: 50,
-            marginBottom: 15,                
-        }
-
-        const styleStates = {
-            marginTop: 30
-        }
-
-        const styleHive = {
-            marginTop: 140,
-            display: 'flex',
-            justifyContent: 'center'
-        }
-
+    render() {                      
         return (
+            <div>
                 <Grid>
                     <Row>
                         <Col xs={6} style={styleHive}>                            
@@ -72,7 +77,14 @@ class Estado extends Component {
                             </Col>
                         </Col>
                     </Row>                
-                </Grid>            
+                </Grid>     
+
+                <Col xs={12}>
+                    <Link to="list-hive">
+                        <Button type="submit" bsSize="large" style={{width: 200, marginTop:60}}>Volver</Button>
+                    </Link>                                     
+                </Col>        
+            </div>            
         );
     }
 }

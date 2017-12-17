@@ -3,6 +3,7 @@ import { Grid, Row, Col, Image, Button, ButtonToolbar } from 'react-bootstrap';
 // import para vincular mi componente a redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router'
 
 const hiveStyle = {
     display: 'flex',
@@ -37,7 +38,9 @@ class ListHive extends Component {
                             return (
                                 <Col xs={6} style={colBtnStyle}>
                                     <ButtonToolbar>                                    
-                                        <Button style={btnStyle}>{apiary.name}</Button>                                    
+                                        <Link to="estado">
+                                            <Button style={btnStyle}>{apiary.name}</Button>                                    
+                                        </Link>
                                     </ButtonToolbar>
                                 </Col>                          
                             )
