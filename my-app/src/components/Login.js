@@ -4,6 +4,12 @@ import { FormGroup, FormControl, Button, Grid, Row, Col, Radio, Image} from 'rea
 import { Link } from 'react-router';
 
 class Login extends Component {
+
+	// siguiente pagina
+    map = (event) => {
+        console.log('working');
+    }
+
 	render() {
 		return (
 			<Grid className="Login">
@@ -19,6 +25,7 @@ class Login extends Component {
 							    <FormGroup>
 							    	<FormControl type="text" placeholder="Password"/>
 							    </FormGroup>
+
 										<Link to="/list-hive">
 											<Button bsStyle="primary" block><Image src="img/sbee.png"/></Button>
 										</Link>
