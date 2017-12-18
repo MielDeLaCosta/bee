@@ -5,8 +5,26 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as apiaryActions from '../actions/apiaryActions'
 
-class AddTask extends Component {
+const styleBtn = {
+    width: 120,
+    marginTop:10            
+}
 
+const styleUlLi = {
+    marginTop: 50            
+}
+
+const styleDelEdit = {
+    height: 41
+}
+
+const styleBtnSave = {
+    position: 'fixed',
+    top: 580,
+    right: 120
+}
+
+class AddTask extends Component {
     state = {
         task: [],
         inputValue: ''
@@ -18,6 +36,7 @@ class AddTask extends Component {
         let task = this.state.task;
         task.push(this.state.inputValue)
         this.setState({ task: task })
+        console.log("add working");
     }
 
     handleInputTaskChange = (event) => {
@@ -26,7 +45,6 @@ class AddTask extends Component {
         // detecta el input al recibir un cambio
         console.log('lala', event.target.value)
     }
-
     deleteInput = todoId => (event) => {
         console.log(todoId);
         let erase = this.state.task.slice();
@@ -54,26 +72,7 @@ class AddTask extends Component {
         )
     }
 
-    render() {
-        const styleBtn = {
-            width: 120,
-            marginTop:10            
-        }
-
-        const styleUlLi = {
-            marginTop: 50            
-        }
-
-        const styleDelEdit = {
-            height: 41
-        }
-
-        const styleBtnSave = {
-            position: 'fixed',
-            top: 580,
-            right: 120
-        }        
-    
+    render() {    
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
