@@ -25,9 +25,10 @@ class Login extends Component {
 							    <FormGroup>
 							    	<FormControl type="text" placeholder="Password"/>
 							    </FormGroup>
-									<Link to="map">
-                                        <Button bsStyle="primary" block onClick={this.map}><Image src="img/sbee.png"/></Button>
-                                    </Link>
+
+										<Link to="/list-hive">
+											<Button bsStyle="primary" block><Image src="img/sbee.png"/></Button>
+										</Link>
 							    	
 							    <Col xs={6}>
 							    	<Radio checked readOnly className="Logintext">Recordar Mi Usuario</Radio>

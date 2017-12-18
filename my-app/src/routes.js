@@ -6,15 +6,15 @@ import Estado from './components/Estado'
 import Resume from './components/Resume';
 import Login from './components/Login';
 import Map from './components/Map';
-import Inscription from './components/Inscription';
+import Listhive from './components/Listhive';
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={Login} />
-        <Route path="/add-task" component={AddTask} />
-        <Route path="/estado" component={Estado} />
+        <Route path="/add-task/:id/status/:status" component={AddTask} />
+        <Route path="/estado/:id" component={Estado} />
         <Route path="/resume" component={Resume} />        
         <Route path="/map" component={Map} />
-        <Route path="inscription" component={Inscription} />
+        <Route path="/list-hive" component={Listhive} />
     </Route>
 )

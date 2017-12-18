@@ -5,10 +5,10 @@ import './App.css';
 class App extends Component {
   render() {
     const styleBee = {
-      marginLeft: 150,
+      marginLeft: 155,
       marginBottom: 30,
       marginTop: 30,
-      width: 80
+      width: 60
     }
 
     return (

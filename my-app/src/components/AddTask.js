@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { Button, FormControl, FormGroup, Col, Row, ListGroup, ListGroupItem, Glyphicon, Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as apiaryActions from '../actions/apiaryActions'
 
 const styleBtn = {
     width: 120,
@@ -42,8 +45,7 @@ class AddTask extends Component {
         // detecta el input al recibir un cambio
         console.log('lala', event.target.value)
     }
-
-    delete = todoId => (event) => {
+    deleteInput = todoId => (event) => {
         console.log(todoId);
         let erase = this.state.task.slice();
         // se necesita poner el 1 para que tome todas las tareas
@@ -52,30 +54,41 @@ class AddTask extends Component {
         console.log(erase);
     }
 
-    edit = todoId => (event) => {
+    editInput = todoId => (event) => {
         let el = prompt('Editando...');
         console.log(el);
         console.log(todoId);
         this.setState( state => {
-            // cambia contenido
-            state.task[todoId] = el;
+        // cambia contenido
+        state.task[todoId] = el;
             return state
         });
+    }
+
+    changeApiaryStatus = () => {
+        this.props.apiaryActions.editApiaryStatus(
+            this.props.params.id, 
+            this.props.params.status
+        )
     }
 
     render() {    
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    
                     <Col xs={12}>
+                    <Alert bsStyle={this.props.params.status}>
+                        <h4>{this.props.params.status.toUpperCase()}</h4>                    
+                    </Alert>
                         <FormGroup bsSize="large">
-                            <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Large text" />
+                            <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Crear tarea" />
                         </FormGroup>
                     </Col>
 
                     <Row>
                         <Col xs={6}>
-                            <Link to="estado">
+                            <Link to={"/estado/" + this.props.params.id}>
                                 <Button type="submit" bsSize="large" style={styleBtn}>Volver</Button>
                             </Link>                            
                         </Col>
@@ -93,12 +106,12 @@ class AddTask extends Component {
                                             <ListGroupItem>{element}</ListGroupItem> 
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.delete(idx)}>
+                                            <Button style={styleDelEdit} onClick={this.deleteInput(idx)}>
                                                 <Glyphicon glyph="trash"/>
                                             </Button>                                                                                        
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.edit(idx)}>
+                                            <Button style={styleDelEdit} onClick={this.editInput(idx)}>
                                                 <Glyphicon glyph="edit"/>
                                             </Button>                                                                                        
                                         </Col>                                        
@@ -109,8 +122,8 @@ class AddTask extends Component {
                     </Col>                           
                 </form>                
                 <Col xs={12}>
-                    <Link to="resume">
-                        <Button type="submit" bsSize="large" bsStyle="warning" style={styleBtnSave}>Guardar lista</Button>
+                    <Link to="/list-hive">
+                        <Button onClick={this.changeApiaryStatus} type="submit" bsSize="large" bsStyle="warning" style={styleBtnSave}>Guardar lista</Button>
                     </Link>                    
                 </Col> 
             </div>
@@ -118,4 +131,18 @@ class AddTask extends Component {
     }
 }
 
-export default AddTask
+const mapStateToProps = (state) => {
+    // vincula el store con los this.props del componente
+    return {
+        apiaries: state.apiaries
+    };
+}
+
+// despacho un action que escucha el reducer para devolver el nuevo estado
+const mapDispatchToProps = (dispatch) => {
+    return {
+        apiaryActions: bindActionCreators(apiaryActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask);
