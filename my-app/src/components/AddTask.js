@@ -27,12 +27,24 @@ class AddTask extends Component {
         console.log('lala', event.target.value)
     }
 
-    delete = (event) => {
-        console.log('delete');
+    deleteInput = todoId => (event) => {
+        console.log(todoId);
+        let erase = this.state.task.slice();
+        // se necesita poner el 1 para que tome todas las tareas
+        erase.splice(todoId, 1);
+        this.setState({ task: erase })
+        console.log(erase);
     }
 
-    edit = (event) => {
-        console.log('edit');
+    editInput = todoId => (event) => {
+        let el = prompt('Editando...');
+        console.log(el);
+        console.log(todoId);
+        this.setState( state => {
+        // cambia contenido
+        state.task[todoId] = el;
+            return state
+        });
     }
 
     changeApiaryStatus = () => {
@@ -64,10 +76,6 @@ class AddTask extends Component {
     
         return (
             <div>
-                
-                
-
-
                 <form onSubmit={this.handleSubmit}>
                     
                     <Col xs={12}>
@@ -75,7 +83,7 @@ class AddTask extends Component {
                         <h4>{this.props.params.status.toUpperCase()}</h4>                    
                     </Alert>
                         <FormGroup bsSize="large">
-                            <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Large text" />
+                            <FormControl type="text" onChange={this.handleInputTaskChange} placeholder="Crear tarea" />
                         </FormGroup>
                     </Col>
 
@@ -99,12 +107,12 @@ class AddTask extends Component {
                                             <ListGroupItem>{element}</ListGroupItem> 
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.delete}>
+                                            <Button style={styleDelEdit} onClick={this.deleteInput}>
                                                 <Glyphicon glyph="trash"/>
                                             </Button>                                                                                        
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.edit}>
+                                            <Button style={styleDelEdit} onClick={this.editInput}>
                                                 <Glyphicon glyph="edit"/>
                                             </Button>                                                                                        
                                         </Col>                                        
