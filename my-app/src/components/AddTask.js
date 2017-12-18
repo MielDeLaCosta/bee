@@ -107,12 +107,12 @@ class AddTask extends Component {
                                             <ListGroupItem>{element}</ListGroupItem> 
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.deleteInput}>
+                                            <Button style={styleDelEdit} onClick={this.deleteInput(idx)}>
                                                 <Glyphicon glyph="trash"/>
                                             </Button>                                                                                        
                                         </Col>
                                         <Col xs={2}>
-                                            <Button style={styleDelEdit} onClick={this.editInput}>
+                                            <Button style={styleDelEdit} onClick={this.editInput(idx)}>
                                                 <Glyphicon glyph="edit"/>
                                             </Button>                                                                                        
                                         </Col>                                        
